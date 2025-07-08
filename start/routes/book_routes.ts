@@ -14,9 +14,11 @@ Route.group(() => {
 
     Route.get('/:bid', 'BooksController.showById')
 
-    Route.post('/:mid', 'BooksController.postBook').middleware('AuthRole')
+    Route.post('/', 'BooksController.postBook')//.middleware('AuthRole')
 
-    Route.patch('/:bid', 'BooksController.updateBook')
+    Route.put('/', 'BooksController.putBook')
+
+    // Route.patch('/:bid', 'BooksController.updateBook')
 
     Route.delete('/:bid', 'BooksController.deleteBook')
 

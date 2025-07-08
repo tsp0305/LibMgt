@@ -41,6 +41,8 @@ export default class BookRepository {
         return book
     }
 
+
+
     public async deleteBook(id) {
         const book = await Book.findOrFail(id)
         await book.delete()
@@ -67,7 +69,7 @@ export default class BookRepository {
     }
 
     public async updateMany(updateList) {
-        const results = []
+        const results: Book[] = []
         for (const item of updateList) {
             const book = await Book.findOrFail(item.id)
             book.merge(item)
@@ -77,8 +79,8 @@ export default class BookRepository {
         return results
     }
 
-    public async deleteMany(ids: number[]) {
-        const results = []
+    public async deleteMany(ids) {
+        const results: Number[] = []
         for (const id of ids) {
             const book = await Book.findOrFail(id)
             await book.delete()

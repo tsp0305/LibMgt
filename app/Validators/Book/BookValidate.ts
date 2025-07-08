@@ -13,10 +13,10 @@ export default class BookValidate {
         author: schema.string([
             rules.maxLength(100)
         ]),
-        copies_total: schema.number([
+        copies_total: schema.number.optional([
             rules.unsigned()
         ]),
-        copies_available: schema.number([
+        copies_available: schema.number.optional([
             rules.unsigned()
         ]),
 

@@ -6,7 +6,7 @@ Route.group(() => {
     Route.post('/', 'MembersController.postMem')
     Route.post('/many', 'MembersController.postManyMem')
 
-    Route.patch('/many', 'MembersController.updateManyMem')
+    // Route.patch('/many', 'MembersController.updateManyMem')
     Route.patch('/:mid', 'MembersController.updateMem')
 
     Route.delete('/many', 'MembersController.deleteManyMem')

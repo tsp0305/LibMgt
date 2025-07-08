@@ -73,6 +73,20 @@ export default class BooksController {
         }
 
     }
+    public async putBook(ctx) {
+        try {
+
+            const payload = await ctx.request.validate(BookValidator)
+
+            const { bid } = await ctx.request.validate(BookValidateId)
+            const res = await this.repo.updateBook(payload, bid)
+            return { success: true, data: res }
+        }
+        catch (err) {
+            return { success: false, message: err }
+        }
+
+    }
 
     public async deleteBook(ctx) {
 
@@ -100,16 +114,17 @@ export default class BooksController {
             return { success: false, message: err }
         }
     }
-
-    public async updateMany(ctx) {
-        try {
-            const payload = ctx.request.body()
-            const res = await this.repo.updateMany(payload)
-            return { success: true, data: res }
-        } catch (err) {
-            return { success: false, message: err }
+    /*
+        public async updateMany(ctx) {
+            try {
+                const payload = ctx.request.body()
+                const res = await this.repo.updateMany(payload)
+                return { success: true, data: res }
+            } catch (err) {
+                return { success: false, message: err }
+            }
         }
-    }
+    */
 
     public async deleteMany(ctx) {
         try {

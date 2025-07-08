@@ -11,8 +11,8 @@ export default class recordRepository {
             return { message: 'Book not available' }
         }
         const record = new Record()
-        record.bookId = bid
-        record.memberId = mid
+        record.bid = bid
+        record.memId = mid
         record.borrowDate = DateTime.now()
         record.returnDate = DateTime.now().plus({ days: 7 })
         record.status = 'Borrowed'

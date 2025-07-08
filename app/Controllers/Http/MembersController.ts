@@ -1,10 +1,10 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import MemRepository from 'App/repositories/Mem_repo'
-import MemUpdateValidator from 'App/Validators/MemUpdateValidator'
-import MemValidateId from 'App/Validators/MemValidateId'
-import MemValidatorName from 'App/Validators/MemValidateName'
-import MemValidator from 'App/Validators/MemValidator'
-import { MemCreateManyValidator, MemDeleteManyValidator, MemUpdateManyValidator } from 'App/Validators/MemValidators'
+import MemUpdateValidator from 'App/Validators/Mem/MemUpdateValidator'
+import MemValidateId from 'App/Validators/Mem/MemValidateId'
+import MemValidatorName from 'App/Validators/Mem/MemValidateName'
+import MemValidator from 'App/Validators/Mem/MemValidator'
+import { MemCreateManyValidator, MemDeleteManyValidator, MemUpdateManyValidator } from 'App/Validators/Mem/MemValidators'
 
 
 export default class MembersController {
@@ -104,17 +104,17 @@ export default class MembersController {
             return { success: false, message: err }
         }
     }
-
-    public async updateManyMem(ctx) {
-        try {
-            const { members } = await ctx.request.validate(MemUpdateManyValidator)
-            const res = await this.repo.updateMany(members)
-            return { success: true, data: res }
-        } catch (err) {
-            return { success: false, message: err }
+    /*
+        public async updateManyMem(ctx) {
+            try {
+                const { members } = await ctx.request.validate(MemUpdateManyValidator)
+                const res = await this.repo.updateMany(members)
+                return { success: true, data: res }
+            } catch (err) {
+                return { success: false, message: err }
+            }
         }
-    }
-
+    */
     public async deleteManyMem(ctx) {
         try {
             const { ids } = await ctx.request.validate(MemDeleteManyValidator)
