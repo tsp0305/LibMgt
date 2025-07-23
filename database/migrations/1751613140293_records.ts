@@ -19,7 +19,7 @@ export default class extends BaseSchema {
 
       table
         .foreign('mem_id')
-        .references('mem_id')
+        .references('id')
         .inTable('members')
         .onDelete('SET NULL')
 

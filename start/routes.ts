@@ -21,3 +21,4 @@
 import './routes/book_routes'
 import './routes/member_routes'
 import './routes/record_routes'
+import './routes/auth_routes'

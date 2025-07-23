@@ -6,7 +6,6 @@ export default class recordRepository {
 
     public async borrow(bid, mid) {
         const book = await Book.find(bid)
-
         if (book.copiesAvailable === 0) {
             return { message: 'Book not available' }
         }
@@ -17,11 +16,9 @@ export default class recordRepository {
         record.returnDate = DateTime.now().plus({ days: 7 })
         record.status = 'Borrowed'
         await record.save()
-
         book.copiesAvailable -= 1
         await book.save()
         return { message: 'Book borrowed successfully', record }
-
     }
 
     public async returnBook(bid, mid) {
@@ -30,7 +27,6 @@ export default class recordRepository {
             .andWhere('mem_id', mid)
             .andWhere('status', 'Borrowed')
             .first()
-
         const now = DateTime.now()
         const dueDate = record.returnDate
         if (now > dueDate) {
@@ -40,21 +36,40 @@ export default class recordRepository {
         }
         record.returnDate = now
         await record.save()
-
         const book = await Book.find(bid)
-
         book.copiesAvailable += 1
         await book.save()
         return { message: `Book ${record.status}`, record }
-
     }
 
-
     public async show() {
-        const records = await Record.query().preload('book').preload('member')
+        const records = await Record.query()
+            .preload('book')
+            .preload('member')
 
-        return records
+        return records.map(record => ({
+            id: record.id,
+            bookTitle: record.book?.title || 'N/A',
+            memberName: record.member?.name || 'N/A',
+            status: record.status,
+            borrowDate: record.borrowDate,
+            returnDate: record.returnDate,
+        }))
+    }
 
+    public async showByMember(mid: number) {
+        const records = await Record.query()
+            .where('mem_id', mid)
+            .preload('book')
+            .preload('member')
+
+        return records.map(record => ({
+            id: record.id,
+            bookTitle: record.book?.title || 'N/A',
+            status: record.status,
+            borrowDate: record.borrowDate,
+            returnDate: record.returnDate,
+        }))
     }
 
 }

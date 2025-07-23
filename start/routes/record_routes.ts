@@ -7,5 +7,7 @@ Route.group(() => {
 
     Route.get('/record', 'RecordsController.showRecord')
 
+    Route.get('/record/:mid', 'RecordsController.showByMember')
+
 }).prefix('/rec').middleware('auth')
 
